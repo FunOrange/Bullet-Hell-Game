@@ -14,7 +14,7 @@ public class Bullet : MonoBehaviour {
 		transform.parent = bulletFolder;
 		move ();
 
-		AudioSource.PlayClipAtPoint(fireSound, transform.position);
+		AudioSource.PlayClipAtPoint(fireSound, transform.position, 0.7f);
 	}
 
 	void move () {
@@ -23,6 +23,12 @@ public class Bullet : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		
+	}
+
+	public void impact() {
+		AudioSource.PlayClipAtPoint(impactSound, transform.position, 0.5f);
+		// trigger impact animation
+		Destroy (gameObject);
 	}
 }

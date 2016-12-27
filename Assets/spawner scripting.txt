@@ -1,0 +1,2 @@
+Each entry contains:
+	GameObject spawner		(Time)
