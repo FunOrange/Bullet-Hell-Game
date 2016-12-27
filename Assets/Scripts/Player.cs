@@ -3,18 +3,16 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 
-	public float speed;
 	private GameObject boundary;
 	private float cooldown;
-	private Transform bulletFolder;
+	private float speed = 6;
+
 	public GameObject Bullet;
 	public float fireRate;
-	public float bulletSpeed;
 
 	// Use this for initialization
 	void Start () {
 		boundary = GameObject.Find ("Player bounds");
-		bulletFolder = GameObject.Find("Bullets").transform;
 	}
 	
 	// Update is called once per frame
@@ -35,7 +33,7 @@ public class Player : MonoBehaviour {
 		transform.position = new Vector3(boundX (), boundY (), 0);
 
 		// fire
-		if (Input.GetKey(KeyCode.X)) 
+		if (Input.GetKey(KeyCode.X) && cooldown <= 0) 
 			fire();
 		if (cooldown > 0)
 			cooldown--;
@@ -53,16 +51,12 @@ public class Player : MonoBehaviour {
 	}
 
 	void fire() {
-		if (cooldown <= 0) {
-			Vector3 muzzle;
-			GameObject bullet;
-			for (int i=0; i<transform.childCount; i++) {
-				muzzle = transform.GetChild(i).transform.position;
-				bullet = Instantiate (Bullet, muzzle, Quaternion.identity) as GameObject;
-				bullet.transform.parent = bulletFolder;
-				bullet.rigidbody2D.velocity = Vector2.up * bulletSpeed;
-			}
-			cooldown = 100/fireRate;
+		Vector3 muzzle;
+		GameObject bullet;
+		for (int i=0; i<transform.childCount; i++) {
+			muzzle = transform.GetChild(i).transform.position;
+			bullet = Instantiate (Bullet, muzzle, Quaternion.identity) as GameObject;
 		}
+		cooldown = 100/fireRate;
 	}
 }
