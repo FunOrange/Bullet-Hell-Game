@@ -7,8 +7,11 @@ public class Player : MonoBehaviour {
 	private float cooldown;
 	private float speed = 6;
 
+	public float health = 10;
 	public GameObject Bullet;
 	public float fireRate;
+
+	public AudioClip hurtSound;
 
 	// Use this for initialization
 	void Start () {
@@ -58,5 +61,28 @@ public class Player : MonoBehaviour {
 			bullet = Instantiate (Bullet, muzzle, Quaternion.identity) as GameObject;
 		}
 		cooldown = 100/fireRate;
+	}
+
+	void OnTriggerEnter2D (Collider2D collider) {
+		if (collider.CompareTag("Bullet")) {
+			Bullet bullet = collider.GetComponent<Bullet>();
+			bullet.impact();
+			hurt (bullet.damage);
+		}
+	}
+
+	void hurt(float damage) {
+		health -= damage;
+		AudioSource.PlayClipAtPoint(hurtSound, transform.position);
+		if(health <= 0)
+			die();
+	}
+
+	void die() {
+		// stop playing bgm
+		// dim everything else
+		// play death sound
+		// play death animation
+		// show game over screen, prompt player to quit to title or retry
 	}
 }

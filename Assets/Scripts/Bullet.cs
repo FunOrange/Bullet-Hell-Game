@@ -3,7 +3,8 @@ using System.Collections;
 
 public class Bullet : MonoBehaviour {
 
-	public float damage, speed;
+	public float damage;
+	public Vector2 initialVelocity;
 	public AudioClip fireSound, impactSound;
 	private Transform bulletFolder;
 
@@ -12,13 +13,11 @@ public class Bullet : MonoBehaviour {
 	void Start () {
 		bulletFolder = GameObject.Find("Bullets").transform;
 		transform.parent = bulletFolder;
-		move ();
+		if(initialVelocity != Vector2.zero) {
+			rigidbody2D.velocity = initialVelocity;
+		}
 
 		AudioSource.PlayClipAtPoint(fireSound, transform.position, 0.7f);
-	}
-
-	void move () {
-		rigidbody2D.velocity = Vector2.up * speed;
 	}
 	
 	// Update is called once per frame

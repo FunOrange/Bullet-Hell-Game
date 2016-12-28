@@ -12,7 +12,7 @@ public class SpawnController : MonoBehaviour {
 	void Update () {
 		if(cooldown <= 0) {
 			spawners[0].GetComponent<Spawner>().spawn();
-			cooldown = 100;
+			cooldown = 40;
 		} else 
 			cooldown--;
 	}

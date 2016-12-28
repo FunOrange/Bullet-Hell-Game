@@ -5,17 +5,6 @@ public class Enemy : MonoBehaviour {
 
 	public AudioClip hurtSound, deathSound;
 	public float health = 1;
-	private bool onScreen = false;
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
 	void OnTriggerEnter2D (Collider2D collider) {
 		// bullet collision
@@ -23,8 +12,6 @@ public class Enemy : MonoBehaviour {
 			Bullet bullet = collider.GetComponent<Bullet>();
 			bullet.impact();
 			hurt (bullet.damage);
-		} else if (collider.name == "Active Area") {
-			onScreen = true;
 		}
 	}
 
