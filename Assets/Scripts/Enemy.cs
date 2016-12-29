@@ -5,7 +5,21 @@ public class Enemy : MonoBehaviour {
 
 	public AudioClip hurtSound, deathSound;
 	public float health = 1;
+	public float cooldown = 30;
+	public GameObject bullet;
 
+	void Update() {
+		if (cooldown <= 0) {
+			fire();
+			cooldown = 50;
+		} else
+			cooldown--;
+	}
+
+	void fire() {
+		Instantiate (bullet, transform.position, Quaternion.identity);
+		print ("pew");
+	}
 	void OnTriggerEnter2D (Collider2D collider) {
 		// bullet collision
 		if (collider.CompareTag("Bullet")) {

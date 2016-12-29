@@ -1,2 +1,23 @@
-Each entry contains:
-	GameObject spawner		(Time)
+At top of hierarchy: Spawn Controller
+
+	-calls the activate() method of each Enemy Wave one by one,
+	 when the last enemy of a particular enemy wave is destroyed. *this check should be performed on each enemy deleted
+
+
+Middle:	Enemy Wave
+
+	-has an activate() method.
+	-calls the spawn() function of each child spawner
+	-stores a list of data with each entry specifying a spawner to spawn from and a point in time to spawn at
+		GameObject spawner = x		|	float time = y		| bool ready = true	(create a subclass to store these values)
+	
+	foreach (SpawnEntry spawnEntry in spawnEntries) {
+		if(deltaTime > spawnEntry.time && spawnEntry.ready)
+			spawnEntry.spawner.spawn();
+			spawnEntry.ready = false;
+	}
+
+Bottom: Spawner
+	-spawns a single enemy of a single type when the spawn() method is called
+
+Note that all of these objects should probably be static (ie. stationary) at all times, so that the enemies are not translated during their animation.
