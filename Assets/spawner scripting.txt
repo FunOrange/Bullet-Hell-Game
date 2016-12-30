@@ -9,14 +9,17 @@ Middle:	Enemy Wave
 	-has an activate() method.
 	-calls the spawn() function of each child spawner
 	-stores a list of data with each entry specifying a spawner to spawn from and a point in time to spawn at
-		GameObject spawner = x		|	float time = y		| bool ready = true	(create a subclass to store these values)
+		int spawnerIndex = x		|	float time = y		
 	
+	- (alternative) have preset methods like sequential spawning which spawns each spawner in order at a certain interval
 	foreach (SpawnEntry spawnEntry in spawnEntries) {
 		if(deltaTime > spawnEntry.time && spawnEntry.ready)
 			spawnEntry.spawner.spawn();
 			spawnEntry.ready = false;
 	}
-
+	NO!!!!
+	use Invoke()
+	
 Bottom: Spawner
 	-spawns a single enemy of a single type when the spawn() method is called
 

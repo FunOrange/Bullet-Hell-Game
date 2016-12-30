@@ -8,7 +8,11 @@ public class Spawner : MonoBehaviour {
 		Gizmos.DrawWireSphere(transform.position, 0.5f);
 	}
 
-	public void spawn() {
+	public void spawnAtTime(float time) {
+		Invoke ("spawn", time);
+	}
+
+	void spawn() {
 		GameObject mob = Instantiate (enemy, transform.position, Quaternion.identity) as GameObject;
 		mob.transform.parent = transform;
 	}

@@ -18,7 +18,6 @@ public class Enemy : MonoBehaviour {
 
 	void fire() {
 		Instantiate (bullet, transform.position, Quaternion.identity);
-		print ("pew");
 	}
 	void OnTriggerEnter2D (Collider2D collider) {
 		// bullet collision
@@ -29,15 +28,8 @@ public class Enemy : MonoBehaviour {
 		}
 	}
 
-	void OnTriggerExit2D (Collider2D collider) {
-		if (collider.name == "Active Area") {
-			Destroy (gameObject);
-		}
-	}
-
 	void hurt(float damage) {
 		health -= damage;
-		// AudioSource.PlayClipAtPoint(hurtSound, transform.position);
 		if(health <= 0)
 			die();
  	}

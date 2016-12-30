@@ -6,14 +6,15 @@ public class SpawnController : MonoBehaviour {
 	private float cooldown = 0;
 
 	void Start () {
-		spawners = GameObject.FindGameObjectsWithTag("Spawner");
+		/*spawners = GameObject.FindGameObjectsWithTag("Spawner");*/
+		transform.GetChild(0).GetComponent<Wave>().activate();
 	}
 	
 	void Update () {
-		if(cooldown <= 0) {
+		/*if(cooldown <= 0) {
 			spawners[0].GetComponent<Spawner>().spawn();
 			cooldown = 80;
 		} else 
-			cooldown--;
+			cooldown--;*/
 	}
 }
