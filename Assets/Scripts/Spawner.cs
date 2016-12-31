@@ -15,5 +15,6 @@ public class Spawner : MonoBehaviour {
 	void spawn() {
 		GameObject mob = Instantiate (enemy, transform.position, Quaternion.identity) as GameObject;
 		mob.transform.parent = transform;
+		transform.GetComponentInParent<Wave>().inProgress = true;
 	}
 }

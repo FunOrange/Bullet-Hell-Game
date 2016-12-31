@@ -55,10 +55,9 @@ public class Player : MonoBehaviour {
 
 	void fire() {
 		Vector3 muzzle;
-		GameObject bullet;
 		for (int i=0; i<transform.childCount; i++) {
 			muzzle = transform.GetChild(i).transform.position;
-			bullet = Instantiate (Bullet, muzzle, Quaternion.identity) as GameObject;
+			Instantiate (Bullet, muzzle, Quaternion.identity);
 		}
 		cooldown = 100/fireRate;
 	}
