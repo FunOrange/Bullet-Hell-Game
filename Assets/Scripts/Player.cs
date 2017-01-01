@@ -5,7 +5,7 @@ public class Player : MonoBehaviour {
 
 	private GameObject boundary;
 	private float cooldown;
-	private float speed = 6;
+	private float speed = 4.5f;
 
 	public float health = 10;
 	public GameObject Bullet;
@@ -54,10 +54,12 @@ public class Player : MonoBehaviour {
 	}
 
 	void fire() {
-		Vector3 muzzle;
-		for (int i=0; i<transform.childCount; i++) {
-			muzzle = transform.GetChild(i).transform.position;
-			Instantiate (Bullet, muzzle, Quaternion.identity);
+		foreach (Transform muzzle in transform) {
+			if (muzzle.CompareTag("Player muzzle")) {
+				Instantiate (Bullet, muzzle.transform.position, Quaternion.identity);
+				muzzle.GetComponent<Animator>().SetTrigger("reset");
+				muzzle.GetComponent<Animator>().SetTrigger("fire");
+			}
 		}
 		cooldown = 100/fireRate;
 	}

@@ -1,12 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public static class SpawnData {
+	static int[] list;
+
+	public static Vector2 staticMethod () {
+		return Vector2.zero;
+	}
+}
+
 public class SpawnController : MonoBehaviour {
 
 	//public spawnList[] spawnLists;
 
 	public SpawnList[] spawnLists;
-	float[][] entries;
+	float[][] spawnEntries;
 	Wave currentWave;
 	int waveNumber = 0;
 
@@ -15,21 +23,27 @@ public class SpawnController : MonoBehaviour {
 		spawnLists = new SpawnList[transform.childCount];
 
 		// spawnlist 1
-		entries = new float[6][];
-		entries[0] = new float[2] {0, 1+0};
-		entries[1] = new float[2] {1, 1+0.1f};
-		entries[2] = new float[2] {2, 1+0.2f};
-		entries[3] = new float[2] {3, 1+0.3f};
-		entries[4] = new float[2] {4, 1+0.4f};
-		entries[5] = new float[2] {5, 1+0.5f};
+		spawnEntries = new float[7][];
+		spawnEntries[0] = new float[2] {0, 1};
+		spawnEntries[1] = new float[2] {1, 2};
+		spawnEntries[2] = new float[2] {2, 3};
+		spawnEntries[3] = new float[2] {3, 4};
+		spawnEntries[4] = new float[2] {4, 5};
+		spawnEntries[5] = new float[2] {5, 6};
+		spawnEntries[6] = new float[2] {6, 7};
 		spawnLists[0] = new SpawnList(getIndexArray(), getTimeArray());
 
 		// spawnlist 2
-		entries = new float[4][];
-		entries[0] = new float[2] {0, 0};
-		entries[1] = new float[2] {1, 0.2f};
-		entries[2] = new float[2] {2, 0.4f};
-		entries[3] = new float[2] {3, 0.6f};
+		spawnEntries = new float[9][];
+		spawnEntries[0] = new float[2] {0, 1};
+		spawnEntries[1] = new float[2] {1, 2};
+		spawnEntries[2] = new float[2] {2, 3};
+		spawnEntries[3] = new float[2] {3, 4};
+		spawnEntries[4] = new float[2] {4, 5};
+		spawnEntries[5] = new float[2] {5, 6};
+		spawnEntries[6] = new float[2] {6, 7};
+		spawnEntries[7] = new float[2] {7, 1.5f};
+		spawnEntries[8] = new float[2] {8, 4.5f};
 		spawnLists[1] = new SpawnList(getIndexArray(), getTimeArray());
 
 	}
@@ -39,17 +53,17 @@ public class SpawnController : MonoBehaviour {
 	}
 	#region spawn list code
 	int[] getIndexArray () {
-		int[] result = new int[entries.Length];
-		for (int i=0; i<entries.Length; i++) {
-			result[i] = (int) entries[i][0];
+		int[] result = new int[spawnEntries.Length];
+		for (int i=0; i<spawnEntries.Length; i++) {
+			result[i] = (int) spawnEntries[i][0];
 		}
 		return result;
 	}
 	float[] getTimeArray () {
 
-		float[] result = new float[entries.Length];
-		for (int i=0; i<entries.Length; i++) {
-			result[i] = entries[i][1];
+		float[] result = new float[spawnEntries.Length];
+		for (int i=0; i<spawnEntries.Length; i++) {
+			result[i] = spawnEntries[i][1];
 		}
 		return result;
 	}

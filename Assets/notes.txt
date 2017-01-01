@@ -1,0 +1,16 @@
+#region TODO:
+change condition for calling next enemy wave
+
+current:
+on childCount == 0 for all spawners
+
+fixed:
+create int spawned for Wave
+increment spawned on each enemy spawned
+check if spawned == spawnList.Length
+#endregion
+
+problem:
+bullets: what parameters do the Enemy determine? --> damage, speed, direction, target, special instructions
+		 what parameters do the bullet prefab determine? --> MOVEMENT TYPE (velocity if linear)
+		 special bullets --> have a parent object contain multiple bullets or something

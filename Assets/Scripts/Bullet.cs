@@ -4,25 +4,32 @@ using System.Collections;
 public class Bullet : MonoBehaviour {
 
 	public float damage;
-	public Vector2 initialVelocity;
+	public float speed;
+	public Vector2 direction = Vector2.zero;
+	public GameObject target = null;
+	// enum movementTypes {linear, linearAimed, accelerated, deccelerated};
+	public enum movementTypes {linear, linearAimed};
+	public movementTypes movement;
 	public AudioClip fireSound, impactSound;
 	private Transform bulletFolder;
 
-
-	// Use this for initialization
 	void Start () {
 		bulletFolder = GameObject.Find("Bullets").transform;
 		transform.parent = bulletFolder;
-		if(initialVelocity != Vector2.zero) {
-			rigidbody2D.velocity = initialVelocity;
-		}
-
 		AudioSource.PlayClipAtPoint(fireSound, transform.position, 0.7f);
+
+		// initial velocity
+		rigidbody2D.velocity = speed * direction;
+		// bullet movement types
+		if (movement == movementTypes.linearAimed) {
+			direction = target.transform.position - transform.position;
+			direction.Normalize();
+			rigidbody2D.velocity = speed * direction;
+		}
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
-		
+
 	}
 
 	public void impact() {
